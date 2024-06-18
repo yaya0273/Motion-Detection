@@ -1,0 +1,39 @@
+Main:
+Here: 
+	if not ComOpen("COM4", "9600 N81 none")
+	    display "Port Error"
+	    goto Here
+	else
+		display "success"
+		sleep 2000
+	endif
+	
+	log "start"
+	$x=1
+	while true
+	    clear
+		$buffer= comread(1,1)
+		log $buffer
+		if find($buffer,1)==0
+		    display "Intruder Detected"
+		    sleep 2000
+		    $sms.Message = "Intruder Detected"
+			$Sms.Phoneno = 9995822757
+			display "Sending SMS to " $Sms.Phoneno
+			if Sms.Send() <= 0
+				display "SMS Sent"
+				log "SMS Sent"
+			else
+				display "SMS Not Sent"                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+				log "SMS Not Sent"	
+			endif
+			sleep 10000
+		else 
+			    display "ON"
+			    log $x
+			    $x+=1
+		endif
+	endwhile
+	comclose()
+	goto Main
+ 
