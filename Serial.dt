@@ -9,7 +9,6 @@ Here:
 	endif
 	
 	log "start"
-	$x=1
 	while true
 	    clear
 		$buffer= comread(1,1)
@@ -30,8 +29,6 @@ Here:
 			sleep 10000
 		else 
 			    display "ON"
-			    log $x
-			    $x+=1
 		endif
 	endwhile
 	comclose()
